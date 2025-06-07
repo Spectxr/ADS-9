@@ -16,14 +16,14 @@ struct Node {
 };
 
 class PMTree {
-public:
+ public:
     explicit PMTree(const std::vector<char>& symbols);
     ~PMTree();
     Node* getRoot() const {
         return root;
     }
 
-private:
+ private:
     Node* root;
     void build(Node* node, const std::vector<char>& symbols);
 };
