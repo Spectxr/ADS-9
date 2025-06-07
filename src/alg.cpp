@@ -17,16 +17,16 @@ int factorial(int n) {
     return res;
 }
 
-void collectPerms(Node* node, std::vector<char>& path, std::vector<std::vector<char>>& output) {
-    path.push_back(node->val);
-    if (node->children.empty()) {
-        output.push_back(path);
+void perms(Node* n, std::vector<char>& p, std::vector<std::vector<char>>& out) {
+    p.push_back(n->val);
+    if (n->children.empty()) {
+        out.push_back(p);
     } else {
-        for (Node* child : node->children) {
-            collectPerms(child, path, output);
+        for (Node* child : n->children) {
+            perms(child, p, out);
         }
     }
-    path.pop_back();
+    p.pop_back();
 }
 
 PMTree::PMTree(const std::vector<char>& symbols) {
@@ -59,7 +59,7 @@ std::vector<std::vector<char>> getAllPerms(PMTree& tree) {
     Node* root = tree.getRoot();
     std::vector<char> path;
     for (Node* child : root->children) {
-        collectPerms(child, path, all);
+        perms(child, path, all);
     }
     return all;
 }
